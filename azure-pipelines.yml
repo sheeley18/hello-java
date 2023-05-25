@@ -1,0 +1,36 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+
+variables:
+  - group: poc.polaris.synopsys.com
+  - name: BRIDGE_POLARIS_APPLICATION_NAME
+    value: '$(Build.Repository.Name)'
+  - name: BRIDGE_POLARIS_PROJECT_NAME
+    value: '$(Build.Repository.Name)'
+ 
+- bash: |
+    curl -fLsS -o bridge.zip $BRIDGECLI_LINUX64 && unzip -qo -d $(Agent.TempDirectory) bridge.zip && rm -f bridge.zip
+    $(Agent.TempDirectory)/synopsys-bridge --verbose --stage polaris polaris.assessment.types=SAST,SCA
+  displayName: 'Polaris Scan'
+  env:
+    BRIDGE_POLARIS_ACCESSTOKEN: $(BRIDGE_POLARIS_ACCESSTOKEN)
