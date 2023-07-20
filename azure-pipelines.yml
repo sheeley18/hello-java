@@ -28,5 +28,5 @@ steps:
     bridge_polaris_serverUrl: '$(BRIDGE_POLARIS_SERVERURL)'
     bridge_polaris_accessToken: '$(BRIDGE_POLARIS_ACCESSTOKEN)'
     bridge_polaris_application_name: 'ASRH-Testing'
-    bridge_polaris_project_name: 'Webgoat'
+    bridge_polaris_project_name: 'Hello-java'
     bridge_polaris_assessment_types: 'SAST,SCA'
