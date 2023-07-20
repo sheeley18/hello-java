@@ -21,17 +21,12 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-variables:
-  - group: poc.polaris.synopsys.com
-  - name: BRIDGE_POLARIS_APPLICATION_NAME
-    value: '$(Build.Repository.Name)'
-  - name: BRIDGE_POLARIS_PROJECT_NAME
-    value: '$(Build.Repository.Name)'
- 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      curl -fLsS -o bridge.zip $BRIDGECLI_LINUX64 && unzip -qo -d $(Agent.TempDirectory) bridge.zip && rm -f bridge.zip
-                $(Agent.TempDirectory)/synopsys-bridge --verbose --stage polaris polaris.assessment.types=SAST,SCA
-
+- task: SynopsysSecurityScan@1
+  displayName: 'Polaris Scan'
+  inputs:
+    scanType: polaris
+    bridge_polaris_serverUrl: '$(BRIDGE_POLARIS_SERVERURL)'
+    bridge_polaris_accessToken: '$(BRIDGE_POLARIS_ACCESSTOKEN)'
+    bridge_polaris_application_name: 'ASRH-Testing'
+    bridge_polaris_project_name: 'Webgoat'
+    bridge_polaris_assessment_types: 'SAST,SCA'
