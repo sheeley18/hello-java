@@ -21,12 +21,12 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: SynopsysSecurityScan@1
+- task: SynopsysSecurityScan@1.0.0
   displayName: 'Polaris Scan'
   inputs:
     scanType: polaris
-    bridge_polaris_serverUrl: '$(BRIDGE_POLARIS_SERVERURL)'
-    bridge_polaris_accessToken: '$(BRIDGE_POLARIS_ACCESSTOKEN)'
-    bridge_polaris_application_name: 'ASRH-Testing'
-    bridge_polaris_project_name: 'Webgoat'
-    bridge_polaris_assessment_types: 'SCA,SAST'
+    bridge_polaris_serverUrl: $(BRIDGE_POLARIS_SERVERURL)
+    bridge_polaris_accessToken: $(BRIDGE_POLARIS_ACCESSTOKEN)
+    bridge_polaris_application_name: $(BRIDGE_POLARIS_APPLICATION_NAME)
+    bridge_polaris_project_name: $(BRIDGE_POLARIS_PROJECT_NAME)
+    bridge_polaris_assessment_types: "SCA,SAST"
