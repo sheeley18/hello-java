@@ -22,7 +22,7 @@ steps:
     goals: 'package'
 
 - task: SynopsysSecurityScan@1
-  displayName: 'Polaris Scan'
+  displayName: 'Polaris Scan'
   inputs:
     scanType: polaris
     bridge_polaris_serverUrl: '$(BRIDGE_POLARIS_SERVERURL)'
