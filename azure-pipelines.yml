@@ -21,7 +21,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: SynopsysSecurityScan@1.0.0
+- task: SynopsysSecurityScan@1.5.0
   displayName: 'Polaris Scan'
   inputs:
     scanType: polaris
