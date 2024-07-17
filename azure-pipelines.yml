@@ -31,4 +31,4 @@ steps:
     bridge_polaris_project_name: $(BRIDGE_POLARIS_PROJECT_NAME)
     bridge_polaris_branch_name: $(BRIDGE_POLARIS_BRANCH_NAME)
     bridge_polaris_assessment_types: "SCA,SAST"
-    bridge_polaris_assessment_mode: "SOURCE_UPLOAD"
+    bridge_polaris_assessment_mode: SOURCE_UPLOAD
