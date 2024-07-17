@@ -21,7 +21,7 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: SynopsysSecurityScan@1.5.0
+- task: SynopsysSecurityScan@1.7.0
   displayName: 'Polaris Scan'
   inputs:
     scanType: polaris
@@ -29,5 +29,6 @@ steps:
     bridge_polaris_accessToken: $(BRIDGE_POLARIS_ACCESSTOKEN)
     bridge_polaris_application_name: $(BRIDGE_POLARIS_APPLICATION_NAME)
     bridge_polaris_project_name: $(BRIDGE_POLARIS_PROJECT_NAME)
-    bridge_polaris_assessment_types: "SCA,SAST"
     bridge_polaris_branch_name: $(BRIDGE_POLARIS_BRANCH_NAME)
+    bridge_polaris_assessment_types: "SCA,SAST"
+    bridge_polaris_assessment_mode: "SOURCE_UPLOAD"
