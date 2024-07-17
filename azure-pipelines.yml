@@ -23,6 +23,8 @@ steps:
 
 - task: SynopsysSecurityScan@1.7.0
   displayName: 'Polaris Scan'
+  env:
+    BRIDGE_POLARIS_ASSESSMENT_MODE: "SOURCE_UPLOAD"
   inputs:
     scanType: polaris
     bridge_polaris_serverUrl: $(BRIDGE_POLARIS_SERVERURL)
@@ -31,4 +33,3 @@ steps:
     bridge_polaris_project_name: $(BRIDGE_POLARIS_PROJECT_NAME)
     bridge_polaris_branch_name: $(BRIDGE_POLARIS_BRANCH_NAME)
     bridge_polaris_assessment_types: "SCA,SAST"
-    bridge_polaris_assessment_mode: SOURCE_UPLOAD
